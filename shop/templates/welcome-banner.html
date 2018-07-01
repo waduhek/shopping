@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<div class = "container">
+    {% if request.user.is_authenticated %}
+        {% if request.user.first_name %}
+            <div class = "row alert alert alert-primary" role = "alert">
+                <div class = "col-12 col-md-12 col-lg-6">
+                    Welcome, {{ request.user.first_name }}
+                </div>
+
+                <div class = "col-12 col-md-12 col-lg-6">
+                    <a class = "text-right" href = "#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </div>
+
+        {% else %}
+            <div class = "row alert alert-primary" role = "alert">
+                <div class = "col-12 col-md-12 col-lg-6">
+                    Welcome, User
+                </div>
+
+                <div class = "col-12 col-md-12 col-lg-3">
+                    <a class = "text-right" href = "#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class = "row alert alert-warning" role = "alert">
+            <div class = "mx-auto">
+                Please <a href = "#">Sign In <i class="fas fa-sign-in-alt"></i></a> or <a href = "#">Sign Up <i class="fas fa-user-plus"></i></a>
+            </div>
+        </div>
+    {% endif %}
+</div>
