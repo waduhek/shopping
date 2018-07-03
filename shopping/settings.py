@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop',
+    'shop.apps.ShopConfig',
+    'signin.apps.SigninConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,10 @@ ROOT_URLCONF = 'shopping.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'shop', 'templates/'), ],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'shop', 'templates/'),
+            os.path.join(BASE_DIR, 'signin', 'templates/')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,7 +127,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_URL = '/media/'

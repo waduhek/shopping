@@ -20,7 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
-    re_path(r'^', include('shop.urls')),
+    re_path(r'^', include('shop.urls', namespace = 'shop')),
+    re_path(r'^signin/', include('signin.urls', namespace = 'signin'))
 ]
 
 if settings.DEBUG:
