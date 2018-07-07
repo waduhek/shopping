@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title>{{ product.name }} - Legit Shop</title>{% endblock %}
+
+{% block content %}
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                <div style = "min-width: 18rem;">
+                    <img src = "{{ product.image.url }}" alt = "{{ product.name }}">
+                </div>
+            </div>
+
+            <div class = "col-12 col-sm-12 col-md-12 col-lg-6">
+                <div class = "border-bottom">
+                    <h1>{{ product.name }}</h1>
+                    <span class = "badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span>
+                    <p class = "text-justify text-muted">{{ product.description }}</p>
+                </div>
+
+                <div class = "py-3 border-bottom">
+                    <div class = "row">
+                        <div class = "col-6">
+                            <h5 class = "text-success pt-2">&#x20b9; {{ product.price }}</h5>
+                        </div>
+
+                        <div class = "col-6">
+                            {% if product.stock <= 0 %}
+                                <a class = "btn btn-outline-primary disabled" href = "#">Add To Cart</a><br>
+                                <small class = "text-danger">This product is currently out of stock.</small>
+                            {% elif product.stock <= 5 %}
+                                <a class = "btn btn-outline-primary" href = "#">Add To Cart</a><br>
+                                <small class = "text-warning">Hurry up! Only {{ product.stock }} are available.</small>
+                            {% else %}
+                                <a class = "btn btn-outline-primary" href = "#">Add To Cart</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

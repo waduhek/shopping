@@ -57,8 +57,8 @@ class SignUp(forms.Form):
         fields = ['username', 'email', 'password', 'conf_password', 'first_name', 'last_name', ]
 
 class SignIn(forms.Form):
-    username = forms.CharField(label = 'Username', min_length = 6, max_length = 50)
-    password = forms.CharField(label = 'Password', widget = forms.PasswordInput)
+    username = forms.CharField(min_length = 6, max_length = 50, widget = forms.TextInput(attrs = {'placeholder': 'Username'}))
+    password = forms.CharField(widget = forms.PasswordInput(attrs = {'placeholder': 'Password'}))
 
     def clean_username(self):
         return self.cleaned_data['username']

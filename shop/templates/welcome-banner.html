@@ -9,7 +9,7 @@
                 </div>
 
                 <div class = "col-12 col-md-12 col-lg-6">
-                    <a class = "text-right" href = "#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                    <a class = "text-right" href = "{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
                 </div>
             </div>
 
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class = "col-12 col-md-12 col-lg-3">
-                    <a class = "text-right" href = "#">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                    <a class = "text-right" href = "{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
                 </div>
             </div>
         {% endif %}
@@ -28,7 +28,7 @@
     {% else %}
         <div class = "row alert alert-warning" role = "alert">
             <div class = "mx-auto">
-                Please <a href = "#">Sign In <i class="fas fa-sign-in-alt"></i></a> or <a href = "#">Sign Up <i class="fas fa-user-plus"></i></a>
+                Please <a href = "{% url 'signin:login' %}">Sign In <i class="fas fa-sign-in-alt"></i></a> or <a href = "{% url 'signin:signup' %}">Sign Up <i class="fas fa-user-plus"></i></a>
             </div>
         </div>
     {% endif %}

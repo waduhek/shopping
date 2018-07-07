@@ -14,7 +14,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
     def get_url(self):
-        return reverse('shop:products_by_category', args = [self.slug, ])
+        return reverse('shop:products_by_category', args = [self.slug])
 
     def __str__(self):
         return 'Category: {}'.format(self.name)
@@ -36,11 +36,15 @@ class Product(models.Model):
     available = models.BooleanField(default = True)
 
     image = models.ImageField(upload_to = 'product', blank = True)
+    thumbnail = models.ImageField(upload_to = 'product_thumbnails')
 
     class Meta:
-        ordering = ('name', )
+        ordering = ('name', 'created', 'updated', )
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
 
+    def get_url(self):
+        return reverse('shop:product_detail', args = [self.category.slug, self.slug, ])
+
     def __str__(self):
-        return 'Product ({}): {} {}'.format(self.category, self.manufacturer, self.name)
+        return 'Product ({}): {} {}'.format(self.category.name, self.manufacturer, self.name)

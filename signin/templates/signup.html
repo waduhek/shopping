@@ -2,8 +2,10 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
 
+{% block title %}<title>Sign Up - Legit Shop</title>{% endblock %}
+
 {% block content %}
-    <div class = "container border border-primary rounded py-3 mt-3 col-4 offset-4" novalidate>
+    <div class = "container border border-primary rounded py-3 col-4 offset-4" novalidate>
         <div class = "row justify-content-center">
             <form action = "{% url 'signin:signup' %}" method = "post">
                 {% csrf_token %}

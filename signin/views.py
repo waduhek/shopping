@@ -17,14 +17,16 @@ def signupView(request):
             user = authenticate(username = username, password = password)
 
             login(request, user)
-            return redirect('shop:all_prods')
+            return redirect('shop:home')
 
     else:
         signup = forms.SignUp()
 
     return render(request, 'signup.html', {'form': signup})
 
-def siginView(request):
+def signinView(request):
+    #logout(request)
+
     if request.method == 'POST':
         signin = forms.SignIn(request.POST)
 
@@ -37,7 +39,7 @@ def siginView(request):
             if user != None:
                 login(request, user)
 
-                return redirect('shop:all_prods')
+                return redirect('shop:home')
 
             else:
                 messages.error(request, 'Entered username or password is incorect.')
@@ -47,7 +49,7 @@ def siginView(request):
 
     return render(request, 'signin.html', {'form': signin})
 
-def signoutView(self):
+def signoutView(request):
     logout(request)
 
-    return redirect('signin:login')
+    return redirect('shop:home')
