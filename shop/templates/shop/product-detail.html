@@ -28,12 +28,18 @@
                         <div class = "col-6">
                             {% if product.stock <= 0 %}
                                 <a class = "btn btn-outline-primary disabled" href = "#">Add To Cart</a><br>
-                                <small class = "text-danger">This product is currently out of stock.</small>
                             {% elif product.stock <= 5 %}
                                 <a class = "btn btn-outline-primary" href = "#">Add To Cart</a><br>
-                                <small class = "text-warning">Hurry up! Only {{ product.stock }} are available.</small>
                             {% else %}
                                 <a class = "btn btn-outline-primary" href = "#">Add To Cart</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-6">
+                            {% if product.stock <= 0 %}
+                                <small class = "text-danger">This product is currently out of stock.</small>
+                            {% elif product.stock <= 5 %}
+                                <small class = "text-warning">Hurry up! Only {{ product.stock }} are available.</small>
                             {% endif %}
                         </div>
                     </div>

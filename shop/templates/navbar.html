@@ -8,7 +8,7 @@
     <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
         <ul class = "navbar-nav mr-auto">
             <li class = "nav-item">
-                <a class = "nav-link" href = "#">Home</a>
+                <a class = "nav-link" href = "{% url 'shop:home' %}">Home</a>
             </li>
 
             <li class = "nav-item dropdown">
@@ -28,9 +28,9 @@
             </li>
         </ul>
 
-        <form class = "form-inline my-2 my-lg-0">
+        <form class = "form-inline my-2 my-lg-0" action="{% url 'search:searchResult' %}" method="get">
             {% csrf_token %}
-            <input class = "form-control mr-sm-2" type = "search" placeholder = "Search" aria-label = "Search">
+            <input class = "form-control mr-sm-2" type = "search" placeholder = "Search" aria-label = "Search" name="q">
             <button class = "btn btn-primary my-2 my-sm-0" type = "submit"><i class = "fas fa-search"></i></button>
         </form>
     </div>

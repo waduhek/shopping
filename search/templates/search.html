@@ -1,14 +1,18 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load staticfiles %}
 
-{% block content %}
-    <div class = "container">
-        {% if category %}
-            <h2>{{ category.name }}</h2>
-        {% endif %}
+{% block title %}
+    <title>Search - Legit Shop</title>
+{% endblock title %}
 
+{% block content %}
+    <div>
+        <p class="text-center">You have searched for: <strong>"{{ query }}"</strong></p>
+    </div>
+
+    <div class="container">
         <div class = "row mx-auto">
-            {% for product in product_list %}
+            {% for product in products %}
                 <div class = "col-9 col-sm-12 col-md-4 col-lg-4">
                     <div class = "card text-center" style = "min-width: 18rem;">
                         <a href = "{{ product.get_url }}">
@@ -22,7 +26,12 @@
                         </div>
                     </div>
                 </div>
+
+                {% empty %}
+                    <div class="row mx-auto">
+                        <p class="text-center">Your search did not return any results.</p>
+                    </div>
             {% endfor %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

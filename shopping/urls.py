@@ -20,10 +20,11 @@ from django.conf import settings
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
-    re_path(r'^signin/', include('signin.urls')),
+    re_path(r'^signin/', include('signin.urls', namespace='signin')),
+    re_path(r'^search/', include('search.urls', namespace='search')),
     re_path(r'^', include('shop.urls')),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
