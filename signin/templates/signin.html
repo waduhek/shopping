@@ -5,16 +5,16 @@
 {% block title %}<title>Sign In</title>{% endblock %}
 
 {% block content %}
-    <div class = "container">
-        <div class = "container border border-primary rounded py-3 col-4 offset-4">
-            <div class = "align-items-center"> 
-                <div class = "row justify-content-center">
-                    <form action = "{% url 'signin:login' %}" method = "post" novalidate>
+    <div class="container">
+        <div class="container border border-primary rounded py-3 col-4 offset-4">
+            <div class="align-items-center"> 
+                <div class="row justify-content-center">
+                    <form action="{% url 'signin:login' %}" method="post" novalidate>
                         {% csrf_token %}
 
                         {% if messages %}
                             {% for mesaage in messages %}
-                                <div class = "alert alert-danger">
+                                <div class="alert alert-danger">
                                     {{ mesaage }}
                                 </div>
                             {% endfor %}
@@ -25,7 +25,7 @@
                         {% endfor %}
 
                         {% if form.non_field_errors %}
-                            <div class = "alert alert-danger" role = "alert">
+                            <div class="alert alert-danger" role = "alert">
                                 {% for error in form.non_field_error %}
                                     {{ error }}
                                 {% endfor %}
@@ -33,13 +33,13 @@
                         {% endif %}
 
                         {% for field in form.visible_fields %}
-                            <div class = "form-group">
+                            <div class="form-group">
                                 {% if form.is_bound %}
                                     {% if field.errors %}
                                         {% render_field field class="form-control is-invalid" %}
 
                                         {% for error in field.errors %}
-                                            <div class = "invalid-feedback">
+                                            <div class="invalid-feedback">
                                                 {{ error }}
                                             </div>
                                         {% endfor %}
@@ -53,12 +53,12 @@
                                 {% endif %}
 
                                 {% if field.help_text %}
-                                    <small class = "form-text text-muted">{{ field.help_text }}</small>
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
                                 {% endif %}
                             </div>
                         {% endfor %}
 
-                        <button type = "submit" class = "btn btn-primary">Sumbit</button>
+                        <button type="submit" class="btn btn-primary">Sumbit</button>
                     </form>
                 </div>
             </div>

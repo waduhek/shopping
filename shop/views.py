@@ -19,8 +19,7 @@ def allProds(request, category_slug=None):
 
 def prodDetail(request, category_slug, product_slug):
     try:
-        product = Product.objects.get(
-            category__slug=category_slug, slug=product_slug)
+        product = Product.objects.get(category__slug=category_slug, slug=product_slug)
     except Exception as e:
         raise e
 

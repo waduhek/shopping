@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'signin.apps.SigninConfig',
+    'cart.apps.CartConfig',
     'widget_tweaks'
 ]
 
@@ -60,7 +61,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'shop', 'templates/'),
             os.path.join(BASE_DIR, 'signin', 'templates/'),
-            os.path.join(BASE_DIR, 'search', 'templates/')
+            os.path.join(BASE_DIR, 'search', 'templates/'),
+            os.path.join(BASE_DIR, 'cart', 'templates/'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

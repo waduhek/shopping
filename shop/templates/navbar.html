@@ -1,37 +1,37 @@
 {% load staticfiles %}
 
-<nav class = "navbar navbar-expand-lg navbar-light bg-light mb-3">
-    <button class = "navbar-toggler" type = "button" data-toggle = "collapse" data-target = "#navbarSupportedContent" aria-controls = "navbarSupportedContent" aria-expand = "false" aria-label = "Toggle navigation">
-        <span class = "navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expand="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
-        <ul class = "navbar-nav mr-auto">
-            <li class = "nav-item">
-                <a class = "nav-link" href = "{% url 'shop:home' %}">Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop:home' %}">Home</a>
             </li>
 
-            <li class = "nav-item dropdown">
-                <a class = "nav-link dropdown-toggle" href = "#" id = "navbarDropdown" role = "button" data-toggle = "dropdown" aria-haspopup = "true" aria-expanded = "false">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Shop
                 </a>
-                <div class = "dropdown-menu" aria-labelledby = "navbarDropdown">
-                    <a class = "dropdown-item" href = "{% url 'shop:home' %}">All Products</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'shop:home' %}">All Products</a>
                     {% for category in categories %}
-                        <a class = "dropdown-item" href = "{{ category.get_url }}">{{ category.name }}</a>
+                        <a class="dropdown-item" href="{{ category.get_url }}">{{ category.name }}</a>
                     {% endfor %}
                 </div>
             </li>
 
-            <li class = "nav-item">
-                <a class = "nav-link {% if not user.is_authenticated %}disabled{% endif %}" href = "#"><i class="fas fa-shopping-cart"></i></a>
+            <li class="nav-item">
+                <a class="nav-link {% if not user.is_authenticated %}disabled{% endif %}" href="{% url 'cart:cart_detail' %}"{% if not user.is_authenticated %}disabled="true"{% endif %}><i class="fas fa-shopping-cart"></i></a>
             </li>
         </ul>
 
-        <form class = "form-inline my-2 my-lg-0" action="{% url 'search:searchResult' %}" method="get">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search:searchResult' %}" method="get">
             {% csrf_token %}
-            <input class = "form-control mr-sm-2" type = "search" placeholder = "Search" aria-label = "Search" name="q">
-            <button class = "btn btn-primary my-2 my-sm-0" type = "submit"><i class = "fas fa-search"></i></button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
 </nav>

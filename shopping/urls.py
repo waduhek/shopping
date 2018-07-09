@@ -22,6 +22,7 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^signin/', include('signin.urls', namespace='signin')),
     re_path(r'^search/', include('search.urls', namespace='search')),
+    re_path(r'^cart/', include('cart.urls', namespace='cart')),
     re_path(r'^', include('shop.urls')),
 ]
 
