@@ -24,7 +24,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {% if not user.is_authenticated %}disabled{% endif %}" href="{% url 'cart:cart_detail' %}"{% if not user.is_authenticated %}disabled="true"{% endif %}><i class="fas fa-shopping-cart"></i></a>
+                {% if not request.user.is_authenticated %}
+                    <a class="nav-link disabled" style="cursor: not-allowed;" data-toggle="tooltip" data-placement="right" title="Sign in to use the cart"><i class="fas fa-shopping-cart"></i></a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i></a>
+                {% endif %}
             </li>
         </ul>
 

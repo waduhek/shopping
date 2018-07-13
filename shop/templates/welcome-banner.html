@@ -4,12 +4,14 @@
     {% if request.user.is_authenticated %}
         {% if request.user.first_name %}
             <div class = "row alert alert alert-primary" role = "alert">
-                <div class="col-12 col-md-12 col-lg-6">
+                <div class="col-12 col-md-6 col-sm-6 col-lg-6">
                     Welcome, {{ request.user.first_name }}
                 </div>
 
-                <div class="col-12 col-md-12 col-lg-6">
-                    <a class="text-right" href="{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                    <div class="col-12 offset-sm-7 col-sm-8 offset-sm-4 text-center">
+                        <a href="{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                    </div>
                 </div>
             </div>
 
@@ -20,7 +22,9 @@
                 </div>
 
                 <div class="col-12 col-md-12 col-lg-3">
-                    <a class="text-right" href="{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                    <div class="col-4 offset-8">
+                        <a class="text-right" href="{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                    </div>
                 </div>
             </div>
         {% endif %}

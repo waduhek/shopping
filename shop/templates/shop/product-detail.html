@@ -6,15 +6,15 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+            <div class="col-12 col-lg-6">
                 <div style="min-width: 18rem;">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <img class="img-fluid pb-3" src="{{ product.image.url }}" alt="{{ product.name }}">
                 </div>
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="border-bottom">
-                    <h1>{{ product.name }}</h1>
+                    <h2>{{ product.name }}</h2>
                     <span class="badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span>
                     <p class="text-justify text-muted">{{ product.description }}</p>
                 </div>
@@ -22,16 +22,20 @@
                 <div class="py-3 border-bottom">
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="text-success pt-2">&#x20b9; {{ product.price }}</h5>
+                            <h5 class="text-success pt-2">&#x20b9;{{ product.price }}</h5>
                         </div>
 
                         <div class="col-6">
-                            {% if product.stock <= 0 %}
-                                <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a><br>
-                            {% elif product.stock <= 5 %}
-                                <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a><br>
+                            {% if not request.user.is_authenticated %}
+                                <button class="btn btn-outline-primary disabled" href="#" style="cursor: not-allowed;" data-toggle="tooltip" data-placement="right" title="Sign in to use the cart">Add To Cart</button><br>
                             {% else %}
-                                <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a>
+                                {% if product.stock <= 0 %}
+                                    <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a><br>
+                                {% elif product.stock <= 5 %}
+                                    <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a><br>
+                                {% else %}
+                                    <a class="btn btn-outline-primary" href="{% url 'cart:add_to_cart' product.id %}">Add To Cart</a><br>
+                                {% endif %}
                             {% endif %}
                         </div>
 

@@ -8,14 +8,14 @@
 {% block content %}
     <div class="container">
         {% if not cart_items %}
-            <div class="mx-auto">
+            <div class="text-center">
                 <h1>Your Cart is empty</h1>
                 <p>Please click <a href="{% url 'shop:home' %}">here</a> to add some products to your cart.</p>
             </div>
 
         {% else %}
-            <div class="mx-auto mb-3">
-                <center><h5>Your Shopping Cart</h5></center>
+            <div class="text-center mb-4">
+                <h5>Your Shopping Cart</h5>
             </div>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
@@ -36,15 +36,15 @@
                                     </td>
 
                                     <td class="text-left">
-                                        {{ cart_item.product.name }}
+                                        <span class="text-primary">{{ cart_item.product.name }}</span>
                                         <br>
-                                        Rate: {{ cart_item.product.price }}
+                                        <span class="text-warning">Rate:</span> &#x20b9;{{ cart_item.product.price }}
                                         <br>
-                                        Quantity: {{ cart_item.quantity }}
+                                        <span class="text-warning">Quantity:</span> {{ cart_item.quantity }}
                                     </td>
 
-                                    <td>
-                                        {{ cart_item.subTotal }}
+                                    <td class="text-success">
+                                        &#x20b9;{{ cart_item.subTotal }}
                                     </td>
 
                                     {% if cart_item.quantity < cart_item.product.stock %}
@@ -67,9 +67,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>
+                                <th scope="col">
                                     Checkout
-                                </td>
+                                </th>
                             </tr>
                         </thead>
 
@@ -82,7 +82,7 @@
 
                             <tr>
                                 <td class="text-left">
-                                    Your total is: <strong>{{ total }}</strong>
+                                    Your total is: <strong>&#x20b9;{{ total }}</strong>
                                 </td>
                             </tr>
                         </tbody>
