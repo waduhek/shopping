@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load humanize %}
 
 {% block title %}<title>{{ product.name }} - Legit Shop</title>{% endblock %}
 
@@ -22,7 +23,7 @@
                 <div class="py-3 border-bottom">
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="text-success pt-2">&#x20b9;{{ product.price }}</h5>
+                            <h5 class="text-success pt-2">&#x20b9;{{ product.price | intcomma }}</h5>
                         </div>
 
                         <div class="col-6">

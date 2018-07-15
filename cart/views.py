@@ -80,11 +80,14 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
     except ObjectDoesNotExist:
         pass
 
+    razorpay_total = total * 100
+
     if request.method == 'POST':
         print(request.POST)
 
     return render(request, 'cart.html', dict(
         cart_items=cart_items,
         total=total,
-        counter=counter
+        counter=counter,
+        razorpay_total=razorpay_total
     ))
