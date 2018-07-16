@@ -15,21 +15,45 @@
                 </tr>
             </thead>
             <tbody>
-                {% for saved_address in saved_addresses %}
+                {% if saved_addresses %} 
+                    {% for saved_address in saved_addresses %}
+                        <tr>
+                            <td colspan="4">
+                                {{ saved_address.address1 }}
+                                {{ saved_address.address2 }}
+                                {{ saved_address.state }}
+                                {{ saved_address.city }}
+                                {{ saved_address.pincode }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <script
+                                src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="rzp_test_21hu8pcAtLm4a4"
+                                data-amount="{{ razorpay_total }}"
+                                data-buttontext="Deliver Here"
+                                data-name="Legit Shop"
+                                data-description=""
+                                data-image="{% static "img/logo.png" %}"
+                                data-theme.color="#F37254"></script>
+                                <input type="hidden" value="Hidden Element" name="hidden">
+                                <a href="delet_address" class="btn btn-outline-danger">Delete this address</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
                     <tr>
                         <td>
-                            {{ saved_address.address1 }}
-                            {{ saved_address.address2 }}
-                            {{ saved_address.state }}
-                            {{ saved_address.city }}
-                            {{ saved_address.pincode }}
+                            <h3>You have no saved addresses.</h3>
                         </td>
                     </tr>
-                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
 	</div>
     <div class="container border border-primary p-4 rounded">
+        <h3>Add a new shipping address.</h3>
         <form action="cart:add_address" class="form-group" method="POST">
             {% csrf_token %}
 

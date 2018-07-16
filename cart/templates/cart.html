@@ -89,21 +89,7 @@
                         </tbody>
                     </table>
                     <div class="mx-auto">
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                            <script
-                                src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="rzp_test_21hu8pcAtLm4a4"
-                                data-amount="{{ razorpay_total }}"
-                                data-buttontext="Proceed to Checkout"
-                                data-name="Legit Shop"
-                                data-description=""
-                                data-image="{% static "img/logo.png" %}"
-                                data-prefill.name="Harshil Mathur"
-                                data-prefill.email="support@razorpay.com"
-                                data-theme.color="#F37254"></script>
-                            <input type="hidden" value="Hidden Element" name="hidden">
-                        </form>
+                        <a href="{% url 'cart:add_address' %}" class="btn btn-block btn-primary mb-1">Proceed to Checkout</a>
 
                         <form action="{% url 'shop:home' %}">
                             <button type="submit" class="btn btn-outline-secondary btn-block">Continue Shopping</button>

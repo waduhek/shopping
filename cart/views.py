@@ -94,7 +94,10 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 
 
 def addAddress(request):
-    saved_addresses = Address.objects.get(user=request.user)
+    try:
+        saved_addresses = Address.objects.get(user=request.user)
+    except ObjectDoesNotExist:
+        pass
 
     if request.method == "POST":
         new_address = Address(request.POST)

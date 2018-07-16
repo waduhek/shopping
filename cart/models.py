@@ -38,5 +38,8 @@ class Address(models.Model):
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
 
+    class Meta:
+        db_table = 'Address'
+
     def __str__(self):
         return "Address:", self.user.name
