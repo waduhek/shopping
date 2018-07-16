@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from shop.models import Product
 
@@ -28,3 +29,14 @@ class CartItem(models.Model):
 
     def __str__(self):
         return self.product
+
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    addressLine1 = models.CharField(max_length=255)
+    addressLine2 = models.CharField(max_length=255)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return "Address:", self.user.name

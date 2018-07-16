@@ -4,9 +4,10 @@ from django.contrib import messages
 
 from . import forms
 
+
 def signupView(request):
     if request.method == 'POST':
-        signup = forms.SignUp(request.POST) 
+        signup = forms.SignUp(request.POST)
 
         if signup.is_valid():
             signup.save()
@@ -14,7 +15,7 @@ def signupView(request):
             username = signup.cleaned_data['username']
             password = signup.cleaned_data['password']
 
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
             login(request, user)
             return redirect('shop:home')
@@ -24,8 +25,9 @@ def signupView(request):
 
     return render(request, 'signup.html', {'form': signup})
 
+
 def signinView(request):
-    #logout(request)
+    # logout(request)
 
     if request.method == 'POST':
         signin = forms.SignIn(request.POST)
@@ -34,9 +36,9 @@ def signinView(request):
             username = signin.cleaned_data['username']
             password = signin.cleaned_data['password']
 
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
 
-            if user != None:
+            if user is not None:
                 login(request, user)
 
                 return redirect('shop:home')
@@ -48,6 +50,7 @@ def signinView(request):
         signin = forms.SignIn()
 
     return render(request, 'signin.html', {'form': signin})
+
 
 def signoutView(request):
     logout(request)
