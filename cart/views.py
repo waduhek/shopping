@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Cart, CartItem, Address
+from .forms import AddressForm
 from shop.models import Product
 
 
@@ -94,25 +95,27 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 
 
 def addAddress(request):
+    saved_addresses = None
+
     try:
-        saved_addresses = Address.objects.get(user=request.user)
+        saved_addresses = Address.objects.get(user__username=request.user)
     except ObjectDoesNotExist:
         pass
 
     if request.method == "POST":
-        new_address = Address(request.POST)
+        new_address = AddressForm(request.POST)
 
         if new_address.is_valid():
             new_address.save()
 
     else:
-        new_address = Address()
+        new_address = AddressForm()
 
     return render(request, 'address/address.html', dict(saved_addresses=saved_addresses, new_address=new_address))
 
 
-def deleteAddress(request, add_id):
-    address = Address.objects.get(user=request.user, id=add_id)
+def deleteAddress(request, address_id):
+    address = Address.objects.get(user__username=request.user, id=address_id)
 
     address.delete()
 
