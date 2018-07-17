@@ -37,7 +37,7 @@ class Address(models.Model):
     addressLine2 = models.CharField(max_length=255)
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=50)
+    pincode = models.CharField(max_length=50, null=True)
 
     class Meta:
         db_table = 'Address'
