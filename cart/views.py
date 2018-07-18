@@ -97,20 +97,18 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 
 def addAddress(request):
     saved_addresses = None
-    print(request.user)
 
     try:
         user = User.objects.get(username=request.user)
-        print(user)
-        # saved_addresses = Address.objects.get(user__username=request.user)
-    except ObjectDoesNotExist:
+        saved_addresses = Address.objects.filter(user=user)
+    except Exception:
         pass
 
     if request.method == "POST":
         new_address = AddressForm(request.POST)
 
         if new_address.is_valid():
-            new_address.save()
+            new_address.save(request)
 
     else:
         new_address = AddressForm()
@@ -119,7 +117,8 @@ def addAddress(request):
 
 
 def deleteAddress(request, address_id):
-    address = Address.objects.get(user__username=request.user, id=address_id)
+    user = User.objects.get(username=request.user)
+    address = Address.objects.get(user=user, id=address_id)
 
     address.delete()
 

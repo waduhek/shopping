@@ -11,7 +11,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th colspan="6">Saved Addresses</th>
+                    <th colspan="6" class="text-center">
+                        Saved Addresses
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -19,26 +21,26 @@
                     {% for saved_address in saved_addresses %}
                         <tr>
                             <td colspan="4">
-                                {{ saved_address.address1 }}
-                                {{ saved_address.address2 }}
-                                {{ saved_address.state }}
-                                {{ saved_address.city }}
+                                {{ saved_address.addressLine1 }}<br>
+                                {{ saved_address.addressLine2 }}<br>
+                                {{ saved_address.state }}<br>
+                                {{ saved_address.city }}<br>
                                 {{ saved_address.pincode }}
                             </td>
-                        </tr>
-                        <tr>
                             <td>
-                                <script
-                                src="https://checkout.razorpay.com/v1/checkout.js"
-                                data-key="rzp_test_21hu8pcAtLm4a4"
-                                data-amount="{{ razorpay_total }}"
-                                data-buttontext="Deliver Here"
-                                data-name="Legit Shop"
-                                data-description=""
-                                data-image="{% static "img/logo.png" %}"
-                                data-theme.color="#F37254"></script>
-                                <input type="hidden" value="Hidden Element" name="hidden">
-                                <a href="{% url 'cart:delete_address' %}" class="btn btn-outline-danger">Delete this address</a>
+                                <form action="" method="POST">
+                                    <script
+                                        src="https://checkout.razorpay.com/v1/checkout.js"
+                                        data-key="rzp_test_21hu8pcAtLm4a4"
+                                        data-amount="{{ razorpay_total }}"
+                                        data-buttontext="Deliver to this address"
+                                        data-name="Legit Shop"
+                                        data-image="{% static "img/logo.png" %}"
+                                        data-theme.color="#F37254"
+                                    ></script>
+                                    <input type="hidden" value="Hidden Element" name="hidden">
+                                </form>
+                                <a href="{% url 'cart:delete_address' saved_address.id %}" class="btn btn-outline-danger">Delete this address</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -54,7 +56,7 @@
 	</div>
     <div class="container border border-primary p-4 rounded">
         <h3>Add a new shipping address.</h3>
-        <form action="{% url 'cart:add_address' %}" class="form-group" method="POST">
+        <form action="{% url 'cart:add_address' %}" class="form-group" method="POST" novalidate>
             {% csrf_token %}
 
             {% if new_address.non_field_errors %}
