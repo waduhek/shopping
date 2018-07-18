@@ -38,7 +38,7 @@
                                 data-image="{% static "img/logo.png" %}"
                                 data-theme.color="#F37254"></script>
                                 <input type="hidden" value="Hidden Element" name="hidden">
-                                <a href="delet_address" class="btn btn-outline-danger">Delete this address</a>
+                                <a href="{% url 'cart:delete_address' %}" class="btn btn-outline-danger">Delete this address</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -54,7 +54,7 @@
 	</div>
     <div class="container border border-primary p-4 rounded">
         <h3>Add a new shipping address.</h3>
-        <form action="cart:add_address" class="form-group" method="POST">
+        <form action="{% url 'cart:add_address' %}" class="form-group" method="POST">
             {% csrf_token %}
 
             {% if new_address.non_field_errors %}
@@ -67,19 +67,20 @@
             {% for field in new_address.visible_fields %}
                 {% if new_address.is_bound %}
                     {% if field.errors %}
-                        {% render_field field class="form-control is-invalid" %}
+                        {% render_field field class="form-control is-invalid mb-2" %}
                         {% for error in field.errors %}
                             <div class="invalid-feedback">
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field field class="form-control is-valid" %}
+                        {% render_field field class="form-control is-valid mb-2" %}
                     {% endif %}
                 {% else %}
-                    {% render_field field class="form-control" %}
+                    {% render_field field class="form-control mb-2" %}
                 {% endif %}
             {% endfor %}
+            <button type="submit" class="btn btn-primary mx-auto">Add new address</button>
         </form>
     </div>
 {% endblock %}

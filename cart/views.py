@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 
 from .models import Cart, CartItem, Address
 from .forms import AddressForm
@@ -96,9 +97,12 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
 
 def addAddress(request):
     saved_addresses = None
+    print(request.user)
 
     try:
-        saved_addresses = Address.objects.get(user__username=request.user)
+        user = User.objects.get(username=request.user)
+        print(user)
+        # saved_addresses = Address.objects.get(user__username=request.user)
     except ObjectDoesNotExist:
         pass
 
