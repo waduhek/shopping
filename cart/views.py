@@ -70,28 +70,23 @@ def delete_from_cart(request, product_id):
     return redirect('cart:cart_detail')
 
 
-def cart_detail(request, total=0, counter=0, cart_items=None):
+def cart_detail(request, total=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, active=True)
 
         for cart_item in cart_items:
             total += (cart_item.quantity * cart_item.product.price)
-            counter += cart_item.quantity
 
     except ObjectDoesNotExist:
         pass
-
-    razorpay_total = total * 100
 
     if request.method == 'POST':
         print(request.POST)
 
     return render(request, 'cart.html', dict(
         cart_items=cart_items,
-        total=total,
-        counter=counter,
-        razorpay_total=razorpay_total
+        total=total
     ))
 
 
