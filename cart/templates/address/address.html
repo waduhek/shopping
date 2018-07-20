@@ -21,6 +21,7 @@
                     {% for saved_address in saved_addresses %}
                         <tr>
                             <td colspan="4">
+                                {{ saved_address.name }}<br>
                                 {{ saved_address.addressLine1 }}<br>
                                 {{ saved_address.addressLine2 }}<br>
                                 {{ saved_address.state }}<br>
@@ -28,14 +29,18 @@
                                 {{ saved_address.pincode }}
                             </td>
                             <td>
-                                <form action="" method="POST">
+                                <form action="{% url 'cart:checkout_success' saved_address.id %}" method="POST">
+                                    {% csrf_token %}
                                     <script
                                         src="https://checkout.razorpay.com/v1/checkout.js"
                                         data-key="rzp_test_21hu8pcAtLm4a4"
                                         data-amount="{{ razorpay_total }}"
-                                        data-buttontext="Deliver to this address"
+                                        data-buttontext="Deliver Here"
                                         data-name="Legit Shop"
+                                        data-description=""
                                         data-image="{% static "img/logo.png" %}"
+                                        data-prefill.name="Harshil Mathur"
+                                        data-prefill.email="support@razorpay.com"
                                         data-theme.color="#F37254"
                                     ></script>
                                     <input type="hidden" value="Hidden Element" name="hidden">

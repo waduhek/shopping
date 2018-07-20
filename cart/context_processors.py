@@ -20,7 +20,6 @@ def getRazorpayTotal(request):
         pass
 
     razorpay_total = total * 100
-    print(razorpay_total)
 
     return dict(
         counter=counter,

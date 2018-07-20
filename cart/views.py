@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Cart, CartItem, Address
 from .forms import AddressForm
 from shop.models import Product
+from order.models import Order, OrderItem
 
 
 def _cart_id(request):
@@ -70,7 +71,7 @@ def delete_from_cart(request, product_id):
     return redirect('cart:cart_detail')
 
 
-def cart_detail(request, total=0, cart_items=None):
+def cart_detail(request, total=0, cart_items=None, address_id=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, active=True)
@@ -84,9 +85,52 @@ def cart_detail(request, total=0, cart_items=None):
     if request.method == 'POST':
         print(request.POST)
 
+        user = User.objects.get(username=request.user)
+        emailAddress = user.email
+
+        address = Address.objects.get(id=address_id)
+        name = address.name
+        addressLine1 = address.addressLine1
+        addressLine2 = address.addressLine2
+        state = address.state
+        city = address.city
+        pincode = address.pincode
+
+        razorpay_payment_id = request.POST['razorpay_payment_id']
+
+        new_order = Order.objects.create(
+            payment_id=razorpay_payment_id,
+            total=total,
+            shippingName=name,
+            shippingAddressLine1=addressLine1,
+            shippingAddressLine2=addressLine2,
+            shippingState=state,
+            shippingCity=city,
+            shippingPincode=pincode,
+            emailAddress=emailAddress
+        )
+        new_order.save()
+
+        for item in cart_items:
+            order_item = OrderItem.objects.create(
+                order=new_order,
+                product=item.product.name,
+                quantity=item.quantity,
+                price=item.product.price
+            )
+            order_item.save()
+
+            products = Product.objects.get(id=item.product.id)
+            products.stock = int(item.product.stock - item.quantity)
+            products.save()
+
+            item.delete()
+
+        return redirect('order:thanks', new_order.id)
+
     return render(request, 'cart.html', dict(
         cart_items=cart_items,
-        total=total
+        total=total,
     ))
 
 

@@ -33,6 +33,7 @@ class CartItem(models.Model):
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, default=None)
     addressLine1 = models.CharField(max_length=255)
     addressLine2 = models.CharField(max_length=255)
     state = models.CharField(max_length=100)
@@ -43,4 +44,4 @@ class Address(models.Model):
         db_table = 'Address'
 
     def __str__(self):
-        return "Address:", self.user.name
+        return "Address:", self.user

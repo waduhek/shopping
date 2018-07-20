@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'signin.apps.SigninConfig',
     'cart.apps.CartConfig',
+    'order.apps.OrderConfig',
     'widget_tweaks'
 ]
 
@@ -64,6 +65,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'signin', 'templates/'),
             os.path.join(BASE_DIR, 'search', 'templates/'),
             os.path.join(BASE_DIR, 'cart', 'templates/'),
+            os.path.join(BASE_DIR, 'order', 'templates/'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

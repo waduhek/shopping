@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>Your order history - Legit Shop</title>
+{% endblock title %}
+
+{% block content %}
+    <div>
+        <div class="text-center">
+            <br>
+            <h1>Your order history</h1>
+            {% if order_list %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Order Date</th>
+                            <th>Total Price</th>
+                            <th>Payment Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_list %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.created | date:"d M Y" }}</td>
+                                <td>{{ order.total }}</td>
+                                <td><i class="fas fa-check"></i>Completed</td>
+                                <td><a href="{% url 'order:order_history_detail' order.id %}">View Order</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>
+                    You have not placed any order yet!<br><br>
+                    <a href="{% url 'shop:home' %}" class="btn btn-outline-primary text-center">Go to the shop</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
