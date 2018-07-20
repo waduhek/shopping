@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% load humanize %}
 
-{% block title %}<title>{{ product.name }} - Legit Shop</title>{% endblock %}
+{% block title %}<title>{{ product.manufacturer }} {{ product.name }} - Legit Shop</title>{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -15,7 +15,7 @@
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="border-bottom">
-                    <h2>{{ product.name }}</h2>
+                    <h2>{{ product.manufacturer }} {{ product.name }}</h2>
                     <span class="badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span>
                     <p class="text-justify text-muted">{{ product.description }}</p>
                 </div>

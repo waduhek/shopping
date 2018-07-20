@@ -5,7 +5,10 @@
         {% if request.user.first_name %}
             <div class = "row alert alert alert-primary" role = "alert">
                 <div class="col-12 col-md-6 col-sm-6 col-lg-6">
-                    Welcome, {{ request.user.first_name }}
+                    Welcome, <a href="#" class="dropdown-toggle" style="color: inherit;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user.first_name }}</a>
+                    <div class="dropdown-menu dropdown-menu-center">
+                        <a href="{% url 'order:order_history' %}" class="dropdown-item">Your Orders</a>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6 col-sm-6 col-lg-6">
@@ -18,11 +21,14 @@
         {% else %}
             <div class="row alert alert-primary" role="alert">
                 <div class="col-12 col-md-12 col-lg-6">
-                    Welcome, User
+                    Welcome, <a href="#" class="dropdown-toggle" style="color: inherit;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+                    <div class="dropdown-menu dropdown-menu-center">
+                        <a href="{% url 'order:order_history' %}" class="dropdown-item">Your Orders</a>
+                    </div>
                 </div>
 
-                <div class="col-12 col-md-12 col-lg-3">
-                    <div class="col-4 offset-8">
+                <div class="col-12 col-md-6 col-sm-6 col-lg-6">
+                    <div class="col-12 offset-sm-7 col-sm-8 offset-sm-4 text-center">
                         <a class="text-right" href="{% url 'signin:signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
                     </div>
                 </div>

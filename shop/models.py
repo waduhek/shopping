@@ -18,15 +18,19 @@ class Category(models.Model):
         return reverse('shop:products_by_category', args=[self.slug])
 
     def __str__(self):
-        return 'Category: {}'.format(self.name)
+        return '{}'.format(self.name)
 
 
 class Product(models.Model):
     manufacturer = models.CharField(max_length=255)
     name = models.CharField(max_length=255, unique=True)
+    model_number = models.CharField(max_length=255, default=None)
     slug = models.SlugField(max_length=255, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    description = models.TextField(blank=True)
+    description = models.TextField(default=None)
+
+    warranty_type = models.CharField(max_length=50, default=None)
+    warranty_duration = models.CharField(max_length=100, default=None)
 
     price = models.DecimalField(max_digits=12, decimal_places=2)
 
