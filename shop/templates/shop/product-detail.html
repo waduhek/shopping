@@ -17,7 +17,7 @@
                 <div class="border-bottom">
                     <h2>{{ product.manufacturer }} {{ product.name }}</h2>
                     <span class="badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span>
-                    <p class="text-justify text-muted">{{ product.description }}</p>
+                    <p class="text-justify text-muted">{{ product.description | safe }}</p>
                 </div>
 
                 <div class="py-3 border-bottom">
