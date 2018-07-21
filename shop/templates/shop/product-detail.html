@@ -16,8 +16,9 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="border-bottom">
                     <h2>{{ product.manufacturer }} {{ product.name }}</h2>
-                    <span class="badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span>
-                    <p class="text-justify text-muted">{{ product.description | safe }}</p>
+                    <span class="badge badge-primary rounded-0 text-uppercase mb-3">{{ product.category.name }}</span><br>
+                    <span><small class="text-muted">Model No.: {{ product.model_number }}</small></span>
+                    <p class="text-justify text-muted"><br>{{ product.description }}</p>
                 </div>
 
                 <div class="py-3 border-bottom">
@@ -50,6 +51,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="2">
+                            Warranty Details
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Warranty Type:</td>
+                        <td>{{ product.warranty_type }}</td>
+                    </tr>
+                    <tr>
+                        <td>Warranty Duration:</td>
+                        <td>{{ product.warranty_duration }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

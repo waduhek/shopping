@@ -12,7 +12,7 @@ def allProds(request, category_slug=None):
         product_list = Product.objects.filter(category=category_page, available=True)
 
     else:
-        product_list = Product.objects.all().filter(available=True)
+        product_list = Product.objects.all().filter(available=True).order_by('-created')[:9]
 
     return render(request, 'shop/category.html', {'category': category_page, 'product_list': product_list})
 
